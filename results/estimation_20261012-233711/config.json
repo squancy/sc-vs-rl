@@ -1,0 +1,137 @@
+{
+  "gamma": 5.0,
+  "dt": 0.08333333333333333,
+  "years": 10.0,
+  "burn": 60,
+  "lo": -1.0,
+  "hi": 2.0,
+  "n_eval": 20000,
+  "n_val": 8192,
+  "n_ref": 8192,
+  "pool_size": 50000,
+  "seed": 0,
+  "device": "cpu",
+  "learners": [
+    "dpo",
+    "ppo",
+    "td3"
+  ],
+  "dpo": {
+    "iters": 400,
+    "batch": 512,
+    "lr": 0.001,
+    "lr_final": 0.0001,
+    "hidden": [
+      64,
+      64
+    ],
+    "grad_clip": 1.0,
+    "weight_decay": 0.0,
+    "eval_every": 50,
+    "w_floor": 0.0001,
+    "pi_init": 0.0
+  },
+  "ppo": {
+    "iters": 120,
+    "n_envs": 256,
+    "epochs": 8,
+    "minibatch": 4096,
+    "lr": 0.0003,
+    "clip": 0.2,
+    "gae_lambda": 0.95,
+    "vf_coef": 0.5,
+    "ent_coef": 0.0,
+    "init_std": 0.2,
+    "min_std": 0.01,
+    "max_grad_norm": 0.5,
+    "reward_scale": 10.0,
+    "hidden": [
+      64,
+      64
+    ],
+    "eval_every": 10,
+    "pi_init": 0.0,
+    "wealth_normalized": true
+  },
+  "td3": {
+    "iters": 30,
+    "n_envs": 128,
+    "buffer": 1000000,
+    "batch": 512,
+    "update_every": 32,
+    "lr_actor": 0.0001,
+    "lr_critic": 0.0003,
+    "tau": 0.005,
+    "policy_noise": 0.05,
+    "noise_clip": 0.1,
+    "expl_noise": 0.1,
+    "expl_noise_final": 0.02,
+    "warmup_iters": 1,
+    "policy_delay": 2,
+    "reward_scale": 10.0,
+    "hidden": [
+      128,
+      128
+    ],
+    "eval_every": 5,
+    "pi_init": 0.0,
+    "wealth_normalized": true,
+    "grad_clip": 1.0
+  },
+  "history_periods": 600,
+  "n_reps": 3,
+  "est_learners": [
+    "dpo"
+  ],
+  "val_frac": 0.4,
+  "est_dpo": {
+    "iters": 300,
+    "batch": 256,
+    "lr": 0.001,
+    "lr_final": 0.0001,
+    "hidden": [
+      16,
+      16
+    ],
+    "grad_clip": 1.0,
+    "weight_decay": 0.0001,
+    "eval_every": 10,
+    "w_floor": 0.0001,
+    "pi_init": 0.0
+  },
+  "est_tau_only": true,
+  "est_rl_data": "bootstrap",
+  "est_block": 24,
+  "rolling_windows": [
+    60,
+    120
+  ],
+  "rl_on_fitted_sim": true,
+  "train_models": [
+    "gbm",
+    "jump",
+    "heston",
+    "cv",
+    "ko",
+    "mix"
+  ],
+  "eval_models": [
+    "gbm",
+    "jump",
+    "heston",
+    "cv",
+    "ko",
+    "gbm_highvol",
+    "ko_fast"
+  ],
+  "mis_learners": [
+    "dpo"
+  ],
+  "costs": [
+    0.005
+  ],
+  "cost_models": [
+    "gbm",
+    "ko"
+  ]
+}
